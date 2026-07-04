@@ -15,19 +15,26 @@ nav a:hover { /*pseudo class*/
     }
 }
 
-figure {
+.image_link_figs{
     border: thin white solid;
     display: inline-flex;
     flex-flow: column;
     margin: auto;
     width: min-content;
+
+    figcaption {
+        background-color: #313131;
+        color: white;
+        padding: 5px;
+        overflow-wrap: break-word;
+        height: 3em;
+        text-align: center;
+    }
+}
+main{
+    display: inline-flex;
+    width: min-content;
 }
 
-figcaption {
-    background-color: #313131;
-    color: white;
-    padding: 5px;
-    overflow-wrap: break-word;
-    height: 3em;
-    text-align: center;
-}
+
+
