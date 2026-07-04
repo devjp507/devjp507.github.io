@@ -1,0 +1,33 @@
+body{
+    background-color:#121212;
+    color: white;
+}
+
+nav a:hover { /*pseudo class*/ 
+    .image_link{
+        width: 120px;
+        height: 120px;
+        transition: .9s; /* transition effect */
+        filter: grayscale(0) !important;
+    }
+    figcaption {
+        color: orange;
+    }
+}
+
+figure {
+    border: thin white solid;
+    display: inline-flex;
+    flex-flow: column;
+    margin: auto;
+    width: min-content;
+}
+
+figcaption {
+    background-color: #313131;
+    color: white;
+    padding: 5px;
+    overflow-wrap: break-word;
+    height: 3em;
+    text-align: center;
+}
