@@ -1,0 +1,22 @@
+header{
+    top: 0;
+    color: white;
+    text-align: center;
+    background-color: rgba(128, 128, 128, 0.758);
+}
+div{
+    color: white;
+    text-align: center;
+}
+table, th, td{
+    margin: 0px auto;
+    border: solid white;
+}
+#feedback{
+    background-color:rgba(128, 128, 128, 0.758);
+}
+table{
+    background-color:rgba(128, 128, 128, 0.758);
+}
+
+
