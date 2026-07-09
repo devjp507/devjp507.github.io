@@ -131,13 +131,13 @@ function gradeQuiz() {
     document.querySelector("#totalScore").style.setProperty("color", "green", "important");
   }
   if(finalPercentage > 80){
+    document.querySelector("#above80").classList.remove('hidden');
     document.querySelector("#above80").textContent = "Congratulations on getting " + finalPercentage + "%!!";
   }
 
   document.querySelector("#validationFdbk").classList.remove('hidden');
   document.querySelector("#totalScore").classList.remove('hidden');
   document.querySelector("#totalAttempts").classList.remove('hidden');
-  document.querySelector("#above80").classList.remove('hidden');
 
   document.querySelector("#totalScore").textContent = `Total Score: ${score}`;
   
