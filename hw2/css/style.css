@@ -5,11 +5,10 @@ table {
     height: 250px;
     width: 475px;
 }
-th{
+.th{
     background-color: rgba(128, 128, 128, 0.176);
-    padding-bottom: 5px;
-    padding-top: 5px;
     border-bottom: 1px solid;
+    height: 50px;
 }
 .qh{
     display: flex;
@@ -24,4 +23,7 @@ th{
 } 
 .q3i{
     display: flex;
+ }
+ .hidden{
+    display: none;
  }
