@@ -126,11 +126,12 @@ function gradeQuiz() {
   let finalPercentage = (score/200) * 100 
 
   if(finalPercentage < 80){
+    document.querySelector("#above80").textContent ="";
     document.querySelector("#totalScore").style.setProperty("color", "red", "important");
   } else{
     document.querySelector("#totalScore").style.setProperty("color", "green", "important");
   }
-  if(finalPercentage > 80){
+  if(finalPercentage >= 80){
     document.querySelector("#above80").classList.remove('hidden');
     document.querySelector("#above80").textContent = "Congratulations on getting " + finalPercentage + "%!!";
   }
