@@ -6,6 +6,7 @@ document.querySelector("#state").addEventListener("change", loadCounties);
 document.querySelector("#password").addEventListener("click", passwordSuggestion);
 document.querySelector("#passwordSuggestion").addEventListener("click", autoFill);
 document.querySelector("#password").addEventListener("change", checkPassword);
+document.querySelector("#passwordAgain").addEventListener("change", checkPasswordAgain);
 
 async function displayCity() {
   try {
@@ -96,30 +97,23 @@ async function validateForm(event) {
 
   let isValidName = true;
   let isValidPassword = true;
+  let isValidPasswordAgain = true;
 
-  let username = document.querySelector("#username").value;
-  let usernameError = document.querySelector("#usernameError");
-  let password = document.querySelector("#password").value; 
+  let usernameAvailable = await checkUsername();
+  let passwordValid = await checkPassword();
+  let passwordAgainValid = await checkPasswordAgain();
 
-  usernameError.textContent = "";
-
-  if (username.length === 0) {
-    usernameError.textContent = "Username required";
-    usernameError.style.color = "red";
+  if (usernameAvailable === false) {
     isValidName = false;
-  } else {
-    let usernameAvailable = await checkUsername();
-    let currentPassword = await checkPassword();
-
-    if (usernameAvailable === false) {
-      isValidName = false;
-    }
-    if (checkPassword === false) {
-      isValidPassword = false;
-    }
+  }
+  if (passwordValid === false) {
+    isValidPassword = false;
+  }
+  if (passwordAgainValid === false) {
+    isValidPasswordAgain = false;
   }
 
-  if (isValidName && isValidPassword) {
+  if (isValidName && isValidPassword && isValidPasswordAgain) {
     document.querySelector("#signupForm").submit();
   }
 }
@@ -177,8 +171,6 @@ async function autoFill(){
 async function checkPassword() {
   let password = document.querySelector("#password").value;
   let passwordError = document.querySelector("#passwordError");
-  let passwordAgain = document.querySelector("#passwordAgain").value;
-  let passwordAgainError = document.querySelector("#passwordAgainError").value;
 
   if (password.length >= 6) {
     passwordError.textContent = "Password is Valid";
@@ -189,14 +181,20 @@ async function checkPassword() {
     passwordError.style.color = "red";
     return false;
   }
-  /* if (passwordAgain == password) {
-    passwordAgainError.textContent = "Password matches Password";
+}
+
+async function checkPasswordAgain() {
+  let password = document.querySelector("#password").value;
+  let passwordAgain = document.querySelector("#passwordAgain").value;
+  let passwordAgainError = document.querySelector("#passwordAgainError");
+
+  if (passwordAgain == password && passwordAgain != "") {
+    passwordAgainError.textContent = "Passwords match";
     passwordAgainError.style.color = "green";
     return true;
   } else{
-    passwordAgainError.textContent = "Does not match password";
+    passwordAgainError.textContent = "Invalid";
     passwordAgainError.style.color = "red";
     return false;
-  } */
-
+  }
 }
