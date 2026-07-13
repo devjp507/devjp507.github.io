@@ -154,18 +154,18 @@ async function loadCounties() {
   }
 }
 async function passwordSuggestion(){
-    
   let url = "https://csumb.space/api/suggestedPassword.php?length=8";
   let response = await fetch(url);
   let data = await response.json();
   document.querySelector("#passwordSuggestion").style.setProperty("color", "green", "important");
   document.querySelector("#passwordSuggestion").textContent = data.password;
-    
+  document.querySelector("#passwordSuggestion").value = data.password;
 }
 async function autoFill(){
   document.querySelector("#passwordSuggestion").style.setProperty("color", "red", "important");
   document.querySelector("#password").value = document.querySelector("#passwordSuggestion").value;
-
+  checkPassword();
+  console.log(document.querySelector("#passwordSuggestion").value);
 }
 
 async function checkPassword() {
@@ -187,8 +187,9 @@ async function checkPasswordAgain() {
   let password = document.querySelector("#password").value;
   let passwordAgain = document.querySelector("#passwordAgain").value;
   let passwordAgainError = document.querySelector("#passwordAgainError");
-
-  if (passwordAgain == password && passwordAgain != "") {
+  let canCompare = await checkPassword();
+  
+  if (canCompare && passwordAgain == password && passwordAgain != "") {
     passwordAgainError.textContent = "Passwords match";
     passwordAgainError.style.color = "green";
     return true;
@@ -197,4 +198,5 @@ async function checkPasswordAgain() {
     passwordAgainError.style.color = "red";
     return false;
   }
+
 }

@@ -3,11 +3,14 @@
 <head>
    <meta charset="utf-8">
    <title> Sign Up Page </title>
+   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 <h1> Sign Up Form</h1>
 <form id="signupForm" action="welcome.html">
+   <hr>
+   <h2>Personal Information</h2>
   <label> First Name:
     <input type="text" id="fName" name="fName"><br>
   </label>
@@ -19,6 +22,9 @@
   Gender:
   <label><input type="radio" name="gender" value="m"> Male</label>
   <label><input type="radio" name="gender" value="f"> Female</label><br>
+
+   <hr>
+   <h2>Based out of</h2>
 
   <label>Zip Code:
      <input type="text" id="zip" name="zip"><br>
@@ -37,6 +43,9 @@
   <label>Select a County:
      <select id="county" name="county"></select><br>
   </label>
+
+   <hr>
+   <h2>Password & Username</h2>
 
   <label>Desired Username:
      <input type="text" id="username" name="username">
