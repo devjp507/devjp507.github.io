@@ -3,6 +3,9 @@ document.querySelector("#zip").addEventListener("change", displayCity);
 document.querySelector("#username").addEventListener("change", checkUsername);
 document.querySelector("#signupForm").addEventListener("submit", validateForm);
 document.querySelector("#state").addEventListener("change", loadCounties);
+document.querySelector("#password").addEventListener("click", passwordSuggestion);
+document.querySelector("#passwordSuggestion").addEventListener("click", autoFill);
+document.querySelector("#password").addEventListener("change", checkPassword);
 
 async function displayCity() {
   try {
@@ -91,26 +94,32 @@ async function checkUsername() {
 async function validateForm(event) {
   event.preventDefault();
 
-  let isValid = true;
+  let isValidName = true;
+  let isValidPassword = true;
 
   let username = document.querySelector("#username").value;
   let usernameError = document.querySelector("#usernameError");
+  let password = document.querySelector("#password").value; 
 
   usernameError.textContent = "";
 
   if (username.length === 0) {
     usernameError.textContent = "Username required";
     usernameError.style.color = "red";
-    isValid = false;
+    isValidName = false;
   } else {
     let usernameAvailable = await checkUsername();
+    let currentPassword = await checkPassword();
 
     if (usernameAvailable === false) {
-      isValid = false;
+      isValidName = false;
+    }
+    if (checkPassword === false) {
+      isValidPassword = false;
     }
   }
 
-  if (isValid) {
+  if (isValidName && isValidPassword) {
     document.querySelector("#signupForm").submit();
   }
 }
@@ -149,4 +158,45 @@ async function loadCounties() {
     errorOption.textContent = "Unable to load states";
     countyMenu.appendChild(errorOption);
   }
+}
+async function passwordSuggestion(){
+    
+  let url = "https://csumb.space/api/suggestedPassword.php?length=8";
+  let response = await fetch(url);
+  let data = await response.json();
+  document.querySelector("#passwordSuggestion").style.setProperty("color", "green", "important");
+  document.querySelector("#passwordSuggestion").textContent = data.password;
+    
+}
+async function autoFill(){
+  document.querySelector("#passwordSuggestion").style.setProperty("color", "red", "important");
+  document.querySelector("#password").value = document.querySelector("#passwordSuggestion").value;
+
+}
+
+async function checkPassword() {
+  let password = document.querySelector("#password").value;
+  let passwordError = document.querySelector("#passwordError");
+  let passwordAgain = document.querySelector("#passwordAgain").value;
+  let passwordAgainError = document.querySelector("#passwordAgainError").value;
+
+  if (password.length >= 6) {
+    passwordError.textContent = "Password is Valid";
+    passwordError.style.color = "green";
+    return true;
+  } else {
+    passwordError.textContent = "Password must be at least six characters long";
+    passwordError.style.color = "red";
+    return false;
+  }
+  /* if (passwordAgain == password) {
+    passwordAgainError.textContent = "Password matches Password";
+    passwordAgainError.style.color = "green";
+    return true;
+  } else{
+    passwordAgainError.textContent = "Does not match password";
+    passwordAgainError.style.color = "red";
+    return false;
+  } */
+
 }
