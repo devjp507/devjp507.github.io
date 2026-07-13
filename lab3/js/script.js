@@ -159,13 +159,11 @@ async function passwordSuggestion(){
   let data = await response.json();
   document.querySelector("#passwordSuggestion").style.setProperty("color", "green", "important");
   document.querySelector("#passwordSuggestion").textContent = data.password;
-  document.querySelector("#passwordSuggestion").value = data.password;
 }
 async function autoFill(){
   document.querySelector("#passwordSuggestion").style.setProperty("color", "red", "important");
-  document.querySelector("#password").value = document.querySelector("#passwordSuggestion").value;
+  document.querySelector("#password").value = document.querySelector("#passwordSuggestion").textContent;
   checkPassword();
-  console.log(document.querySelector("#passwordSuggestion").value);
 }
 
 async function checkPassword() {
