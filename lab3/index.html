@@ -52,14 +52,24 @@
   </label>
   <span id="usernameError"></span><br>
 
-  <label>Password:
+  <!-- <label>Password:
   <input type="password" id="password" name="password">
   </label>
   <span id="passwordSuggestion"></span><br>
-  <span id="passwordError"></span><br>
+  <span id="passwordError"></span><br> -->
+
+   <label>Password:
+      <input type="password" id="password" name="password">
+   </label>
+   <span id="passwordError"></span><br>
+
+   <span id="password_Suggestion" hidden>
+      <input type="checkbox" id="passwordCB" name="suggested">
+      <label for="passwordCB">Use Suggested Password: <span id="passwordSuggestion"></span></label>
+   </span><br>
 
   <label>Type Password Again:
-     <input type="password" id="passwordAgain" name="passwordAgain"><br>
+     <input type="password" id="passwordAgain" name="passwordAgain">
   </label>
   <span id="passwordAgainError"></span><br>
 

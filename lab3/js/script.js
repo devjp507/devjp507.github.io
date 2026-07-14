@@ -7,6 +7,9 @@ document.querySelector("#password").addEventListener("click", passwordSuggestion
 document.querySelector("#passwordSuggestion").addEventListener("click", autoFill);
 document.querySelector("#password").addEventListener("change", checkPassword);
 document.querySelector("#passwordAgain").addEventListener("change", checkPasswordAgain);
+document.querySelector("#passwordCB").addEventListener("click", autoFill);
+
+let inUse = false;
 
 async function displayCity() {
   try {
@@ -153,18 +156,29 @@ async function loadCounties() {
     countyMenu.appendChild(errorOption);
   }
 }
-async function passwordSuggestion(){
+async function passwordSuggestion() {
+  document.querySelector("#password_Suggestion").hidden = false;
   let url = "https://csumb.space/api/suggestedPassword.php?length=8";
   let response = await fetch(url);
   let data = await response.json();
   document.querySelector("#passwordSuggestion").style.setProperty("color", "green", "important");
   document.querySelector("#passwordSuggestion").textContent = data.password;
+  document.querySelector("#passwordCB").checked = false;
 }
-async function autoFill(){
-  document.querySelector("#passwordSuggestion").style.setProperty("color", "red", "important");
-  document.querySelector("#password").value = document.querySelector("#passwordSuggestion").textContent;
-  checkPassword();
+async function autoFill() {
+  if(!inUse){
+    inUse = true;
+    document.querySelector("#passwordSuggestion").style.setProperty("color", "red", "important");
+    document.querySelector("#password").value = document.querySelector("#passwordSuggestion").textContent;
+    checkPassword();
+  }
+  else{
+    inUse =false;
+    document.querySelector("#passwordSuggestion").style.setProperty("color", "green", "important");
+    document.querySelector("#password").value = "";
+  }
 }
+
 
 async function checkPassword() {
   let password = document.querySelector("#password").value;
