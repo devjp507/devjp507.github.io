@@ -1,0 +1,15 @@
+input[type="range"]{
+  cursor: pointer;
+}
+table {
+    margin: 0px auto;
+    border: 1px solid black;
+}
+table,th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td{
+    text-align: center;
+}
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <h1> Earthquake Search</h1>
+<form id="signupForm" action="welcome.html">
+   <hr>
+   <h2> Start Date</h2>
+   <div id="calendars">
+   <table id="startCalendar">
+      <caption>
+         <select id="startYear" name="startYear">
+            <option value="">loading years...</option>
+         </select>
+      </caption>
+      <caption>
+         <select id="startMonth" name="startMonth">
+            <option value="1">January </option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+         </select>
+      </caption>
+    
+      <tr>
+         <td><input type="radio" name="day" value="1" checked>1</td>
+         <td><input type="radio" name="day" value="2">2</td>
+         <td><input type="radio" name="day" value="3">3</td>
+         <td><input type="radio" name="day" value="4">4</td>
+         <td><input type="radio" name="day" value="5">5</td>
+         <td><input type="radio" name="day" value="6">6</td>
+         <td><input type="radio" name="day" value="7">7</td>
+      </tr>
+
+      <tr>
+         <td><input type="radio" name="day" value="8">8</td>
+         <td><input type="radio" name="day" value="9">9</td>
+         <td><input type="radio" name="day" value="10">10</td>
+         <td><input type="radio" name="day" value="11">11</td>
+         <td><input type="radio" name="day" value="12">12</td>
+         <td><input type="radio" name="day" value="13">13</td>
+         <td><input type="radio" name="day" value="14">14</td>
+      </tr>
+
+      <tr>
+         <td><input type="radio" name="day" value="15">15</td>
+         <td><input type="radio" name="day" value="16">16</td>
+         <td><input type="radio" name="day" value="17">17</td>
+         <td><input type="radio" name="day" value="18">18</td>
+         <td><input type="radio" name="day" value="19">19</td>
+         <td><input type="radio" name="day" value="20">20</td>
+         <td><input type="radio" name="day" value="21">21</td>
+      </tr>
+
+      <tr>
+         <td><input type="radio" name="day" value="22">22</td>
+         <td><input type="radio" name="day" value="23">23</td>
+         <td><input type="radio" name="day" value="24">24</td>
+         <td><input type="radio" name="day" value="25">25</td>
+         <td><input type="radio" name="day" value="26">26</td>
+         <td><input type="radio" name="day" value="27">27</td>
+         <td><input type="radio" name="day" value="28">28</td>
+      </tr>
+
+      <tr>
+         <td id="day29"><input type="radio" name="day" value="29">29</td>
+         <td id="day30"><input type="radio" name="day" value="30">30</td>
+         <td id="day31"><input type="radio" name="day" value="31">31</td>
+      </tr>
+   </table>
+   </div>
+
+   <hr>
+
+   Magnitude:
+   <label><input type="radio" name="comparisonOp" value="lessThanOrEqualTo"> ≤ </label>
+   <label><input type="radio" name="comparisonOp" value="equalTo"> = </label>
+   <label><input type="radio" name="comparisonOp" value="greaterThanOrEqualTo"> ≥ </label>
+   <label><input type="range" id="mag" name="mag" min="1.0" max="9.9" step="0.1" value="1.0" oninput="magValue.value = this.value"></label>
+   <output id="magValue"></output>
+
+
+   <!-- <label><input type="text" id="textMag" name="mag" maxlength="4"></label> -->
+
+
+
+
+   <hr>
+   <button>Search!</button>
+</form>
+
+    <script src="js/script.js"> </script>
+</body>
+</html>
