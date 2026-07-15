@@ -2,7 +2,7 @@ input[type="range"]{
   cursor: pointer;
 }
 table {
-    margin: 0px auto;
+    margin: 0px auto; 
     border: 1px solid black;
 }
 table,th, td{
@@ -11,5 +11,8 @@ table,th, td{
 }
 td{
     text-align: center;
+}
+#calendars{
+    display:flex;
 }
 

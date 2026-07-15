@@ -11,17 +11,17 @@
     <h1> Earthquake Search</h1>
 <form id="signupForm" action="welcome.html">
    <hr>
-   <h2> Start Date</h2>
-   <div id="calendars">
+   <div id="calendars"> 
    <table id="startCalendar">
+      <caption><h2> Start Date</h2></caption>
       <caption>
          <select id="startYear" name="startYear">
-            <option value="">loading years...</option>
+            <option value="2026">2026</option>
          </select>
       </caption>
       <caption>
          <select id="startMonth" name="startMonth">
-            <option value="1">January </option>
+            <option value="1" selected>January </option>
             <option value="2">February</option>
             <option value="3">March</option>
             <option value="4">April</option>
@@ -37,49 +37,120 @@
       </caption>
     
       <tr>
-         <td><input type="radio" name="day" value="1" checked>1</td>
-         <td><input type="radio" name="day" value="2">2</td>
-         <td><input type="radio" name="day" value="3">3</td>
-         <td><input type="radio" name="day" value="4">4</td>
-         <td><input type="radio" name="day" value="5">5</td>
-         <td><input type="radio" name="day" value="6">6</td>
-         <td><input type="radio" name="day" value="7">7</td>
+         <td><input type="radio" name="startDay" value="1" checked>1</td>
+         <td><input type="radio" name="startDay" value="2">2</td>
+         <td><input type="radio" name="startDay" value="3">3</td>
+         <td><input type="radio" name="startDay" value="4">4</td>
+         <td><input type="radio" name="startDay" value="5">5</td>
+         <td><input type="radio" name="startDay" value="6">6</td>
+         <td><input type="radio" name="startDay" value="7">7</td>
       </tr>
 
       <tr>
-         <td><input type="radio" name="day" value="8">8</td>
-         <td><input type="radio" name="day" value="9">9</td>
-         <td><input type="radio" name="day" value="10">10</td>
-         <td><input type="radio" name="day" value="11">11</td>
-         <td><input type="radio" name="day" value="12">12</td>
-         <td><input type="radio" name="day" value="13">13</td>
-         <td><input type="radio" name="day" value="14">14</td>
+         <td><input type="radio" name="startDay" value="8">8</td>
+         <td><input type="radio" name="startDay" value="9">9</td>
+         <td><input type="radio" name="startDay" value="10">10</td>
+         <td><input type="radio" name="startDay" value="11">11</td>
+         <td><input type="radio" name="startDay" value="12">12</td>
+         <td><input type="radio" name="startDay" value="13">13</td>
+         <td><input type="radio" name="startDay" value="14">14</td>
       </tr>
 
       <tr>
-         <td><input type="radio" name="day" value="15">15</td>
-         <td><input type="radio" name="day" value="16">16</td>
-         <td><input type="radio" name="day" value="17">17</td>
-         <td><input type="radio" name="day" value="18">18</td>
-         <td><input type="radio" name="day" value="19">19</td>
-         <td><input type="radio" name="day" value="20">20</td>
-         <td><input type="radio" name="day" value="21">21</td>
+         <td><input type="radio" name="startDay" value="15">15</td>
+         <td><input type="radio" name="startDay" value="16">16</td>
+         <td><input type="radio" name="startDay" value="17">17</td>
+         <td><input type="radio" name="startDay" value="18">18</td>
+         <td><input type="radio" name="startDay" value="19">19</td>
+         <td><input type="radio" name="startDay" value="20">20</td>
+         <td><input type="radio" name="startDay" value="21">21</td>
       </tr>
 
       <tr>
-         <td><input type="radio" name="day" value="22">22</td>
-         <td><input type="radio" name="day" value="23">23</td>
-         <td><input type="radio" name="day" value="24">24</td>
-         <td><input type="radio" name="day" value="25">25</td>
-         <td><input type="radio" name="day" value="26">26</td>
-         <td><input type="radio" name="day" value="27">27</td>
-         <td><input type="radio" name="day" value="28">28</td>
+         <td><input type="radio" name="startDay" value="22">22</td>
+         <td><input type="radio" name="startDay" value="23">23</td>
+         <td><input type="radio" name="startDay" value="24">24</td>
+         <td><input type="radio" name="startDay" value="25">25</td>
+         <td><input type="radio" name="startDay" value="26">26</td>
+         <td><input type="radio" name="startDay" value="27">27</td>
+         <td><input type="radio" name="startDay" value="28">28</td>
       </tr>
 
       <tr>
-         <td id="day29"><input type="radio" name="day" value="29">29</td>
-         <td id="day30"><input type="radio" name="day" value="30">30</td>
-         <td id="day31"><input type="radio" name="day" value="31">31</td>
+         <td id="startDay29"><input type="radio" name="startDay" value="29">29</td>
+         <td id="startDay30"><input type="radio" name="startDay" value="30">30</td>
+         <td id="startDay31"><input type="radio" name="startDay" value="31">31</td>
+      </tr>
+   </table>
+
+   <table id="endCalendar">
+      <caption><h2> End Date</h2></caption>
+      <caption>
+         <select id="endYear" name="endYear">
+            <option value="2026">2026</option>
+         </select>
+      </caption>
+      <caption>
+         <select id="endMonth" name="endMonth">
+            <option value="1" selected>January </option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+         </select>
+      </caption>
+    
+      <tr>
+         <td><input type="radio" name="endDay" value="1" checked>1</td>
+         <td><input type="radio" name="endDay" value="2">2</td>
+         <td><input type="radio" name="endDay" value="3">3</td>
+         <td><input type="radio" name="endDay" value="4">4</td>
+         <td><input type="radio" name="endDay" value="5">5</td>
+         <td><input type="radio" name="endDay" value="6">6</td>
+         <td><input type="radio" name="endDay" value="7">7</td>
+      </tr>
+
+      <tr>
+         <td><input type="radio" name="endDay" value="8">8</td>
+         <td><input type="radio" name="endDay" value="9">9</td>
+         <td><input type="radio" name="endDay" value="10">10</td>
+         <td><input type="radio" name="endDay" value="11">11</td>
+         <td><input type="radio" name="endDay" value="12">12</td>
+         <td><input type="radio" name="endDay" value="13">13</td>
+         <td><input type="radio" name="endDay" value="14">14</td>
+      </tr>
+
+      <tr>
+         <td><input type="radio" name="endDay" value="15">15</td>
+         <td><input type="radio" name="endDay" value="16">16</td>
+         <td><input type="radio" name="endDay" value="17">17</td>
+         <td><input type="radio" name="endDay" value="18">18</td>
+         <td><input type="radio" name="endDay" value="19">19</td>
+         <td><input type="radio" name="endDay" value="20">20</td>
+         <td><input type="radio" name="endDay" value="21">21</td>
+      </tr>
+
+      <tr>
+         <td><input type="radio" name="endDay" value="22">22</td>
+         <td><input type="radio" name="endDay" value="23">23</td>
+         <td><input type="radio" name="endDay" value="24">24</td>
+         <td><input type="radio" name="endDay" value="25">25</td>
+         <td><input type="radio" name="endDay" value="26">26</td>
+         <td><input type="radio" name="endDay" value="27">27</td>
+         <td><input type="radio" name="endDay" value="28">28</td>
+      </tr>
+
+      <tr>
+         <td id="endDay29"><input type="radio" name="endDay" value="29">29</td>
+         <td id="endDay30"><input type="radio" name="endDay" value="30">30</td>
+         <td id="endDay31"><input type="radio" name="endDay" value="31">31</td>
       </tr>
    </table>
    </div>
@@ -94,7 +165,6 @@
    <output id="magValue"></output>
 
 
-   <!-- <label><input type="text" id="textMag" name="mag" maxlength="4"></label> -->
 
 
 
