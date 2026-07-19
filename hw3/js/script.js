@@ -1,34 +1,60 @@
+const currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth() + 1;
+const currentDay = currentDate.getDate();
+let isStartCurrentYear = true;
+let isEndCurrentYear = true;
+let startDaysHide = false;
+let endDaysHide = false;
+
 document.addEventListener("DOMContentLoaded", loadCalendar(document.querySelector("#startCalendar")));
 document.addEventListener("DOMContentLoaded", loadCalendar(document.querySelector("#endCalendar")));
 
 document.addEventListener("DOMContentLoaded", loadYears(document.querySelector("#startYear")));
 document.addEventListener("DOMContentLoaded", loadYears(document.querySelector("#endYear")));
 
-//leap year
-document.querySelector("#startYear").addEventListener("change", (event) => {
-    if(document.querySelector("#startMonth").value != 2){
-        return;
-    }else{
-        editCalendar(event, 'start');
-    }
-});
-document.querySelector("#startMonth").addEventListener("change", (event) => editCalendar(event, 'start'));
 
-//leap year
-document.querySelector("#endYear").addEventListener("change", (event) => {
-    if(document.querySelector("#endMonth").value != 2){
-        return;
-    }else{
-        editCalendar(event, 'end');
+//change start month
+document.querySelector("#startMonth").addEventListener("change", () => editCalendar("start"));
+//handle current year
+document.querySelector("#startYear").addEventListener("change", () => {
+    if(document.querySelector("#startYear").value != currentYear && isStartCurrentYear){
+        isStartCurrentYear = false;
+        handleCurrentYear(isStartCurrentYear, "start");
     }
+    else if(document.querySelector("#startYear").value == currentYear && !isStartCurrentYear){
+        isStartCurrentYear = true;
+        handleCurrentYear(isStartCurrentYear, "start");
+    }else{return;}//switching between non-current years
 });
-document.querySelector("#endMonth").addEventListener("change", (event) => editCalendar(event, 'end'));
+//reset start calendar
+document.querySelector("#startYear").addEventListener("change", resetMonthAndDay);
+document.querySelector("#startMonth").addEventListener("change", resetDay);
+
+
+//change end month
+document.querySelector("#endMonth").addEventListener("change", () => editCalendar("end"));
+//handle current year
+document.querySelector("#endYear").addEventListener("change", () => {
+    if(document.querySelector("#endYear").value != currentYear && isEndCurrentYear){
+        isEndCurrentYear = false
+        handleCurrentYear(isEndCurrentYear, "end");
+    }
+    else if(document.querySelector("#endYear").value == currentYear && !isEndCurrentYear){
+        isEndCurrentYear = true;
+        handleCurrentYear(isEndCurrentYear, "end");
+    }else{return;}//switching between non-current years
+});
+//reset end calendar
+document.querySelector("#endYear").addEventListener("change", resetMonthAndDay);
+document.querySelector("#endMonth").addEventListener("change", resetDay);
+
 
 
 async function loadCalendar(calendar) {
 
     let calendarTable = calendar;
-    let tdName = calendarTable.getAttribute('data-str');
+    let prefix = calendarTable.getAttribute('data-str');
 
     let row = document.createElement("tr");
 
@@ -36,15 +62,15 @@ async function loadCalendar(calendar) {
         let cell = document.createElement("td");
 
         if(i>28){
-            cell.id = tdName + "Cell" + i;
+            cell.id = prefix + "Cell" + i;
         }
         
         //input radios
         let inp = document.createElement("input"); 
         inp.type = "radio"; 
-        inp.name = tdName + "Day"; 
+        inp.name = prefix + "Day"; 
         inp.value = i;
-        inp.id = tdName + "Day" + i
+        inp.id = prefix + "Day" + i;
         let lb = document.createElement("label"); 
         lb.for = inp.id;
         lb.textContent = i;
@@ -62,22 +88,49 @@ async function loadCalendar(calendar) {
         }
     }
     //default
-    document.querySelector(`#${tdName}Day1`).checked = true;
+    document.querySelector(`#${prefix}Day1`).checked = true;
+    handleCurrentYear(true, prefix);
 }
 
 async function loadYears(element) {
     
     let yearMenu = element;
 
-    for (let i = 2025; i>=1811; i--) {
+    for (let i = currentYear; i>=1811; i--) {
         let option = document.createElement("option");
         option.value = i;
         option.textContent = i;
         yearMenu.appendChild(option);
     }
+    //default
+    yearMenu.value = currentYear;
 }
-async function editCalendar(event, str) {
-    let month = document.querySelector(`#${str}Month`).value
+
+async function handleCurrentYear(trf, prefix) {
+    //hide and unhide month options
+    let monthSelection = document.querySelector(`#${prefix}Month`);
+    for(let option of monthSelection.options){
+        if(option.value > currentMonth){
+            option.hidden = trf;
+        }
+    }
+}
+
+
+async function resetMonthAndDay() {
+    let prefix = this.getAttribute("class");
+    document.querySelector(`#${prefix}Day1`).checked = true;
+    document.querySelector(`#${prefix}Month`).value = 1;
+    editCalendar(prefix);
+}
+
+async function resetDay() {
+    let prefix = this.getAttribute("class");
+    document.querySelector(`#${prefix}Day1`).checked = true;
+}
+
+async function editCalendar(str) {
+    let month = document.querySelector(`#${str}Month`).value;
     let days = await getDays(month, str);
     
     if(days == 28){
@@ -97,7 +150,35 @@ async function editCalendar(event, str) {
         document.querySelector(`#${str}Cell30`).hidden = false;
         document.querySelector(`#${str}Cell31`).hidden = false;
     }
+
+    let isCurrentMonth = month == currentMonth;
+    let isCurrentYear = document.querySelector(`#${str}Year`).value == currentYear;
+
+    if(str == "start"){
+        if(isCurrentYear && isCurrentMonth || startDaysHide){
+        //hide and unhide day radios
+        startDaysHide = isCurrentYear && isCurrentMonth;
+        hideDaysFunc(startDaysHide, str);
+        }
+    }
+    else if(str == "end"){
+        if(isCurrentYear && isCurrentMonth || endDaysHide){
+        //hide and unhide day radios
+        endDaysHide = isCurrentYear && isCurrentMonth;
+        hideDaysFunc(endDaysHide, str);
+        }
+    }
 }
+
+async function hideDaysFunc(hideDays, str) {
+    let dayRadioGroup = document.getElementsByName(str + "Day");
+    dayRadioGroup.forEach(radio => {
+        if(radio.value > currentDay){
+            radio.hidden = hideDays;
+        }
+    });
+}
+
 async function getDays(month, str) {
     switch(month){
         case '1':
