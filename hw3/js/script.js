@@ -13,6 +13,60 @@ document.addEventListener("DOMContentLoaded", loadCalendar(document.querySelecto
 document.addEventListener("DOMContentLoaded", loadYears(document.querySelector("#startYear")));
 document.addEventListener("DOMContentLoaded", loadYears(document.querySelector("#endYear")));
 
+document.querySelector("#searchResults").addEventListener("submit", validateForm);
+
+async function validateForm(event) {
+    let startYear = document.querySelector("#startYear").value;
+    let startMonth = document.querySelector("#startMonth").value;
+    let startDay = document.querySelector('input[name="startDay"]:checked').value;
+
+    let endYear = document.querySelector("#endYear").value;
+    let endMonth = document.querySelector("#endMonth").value;
+    let endDay = document.querySelector('input[name="endDay"]:checked').value;
+
+    let magSign = document.querySelector('input[name="comparisonOp"]:checked').value;
+    let magValue = document.querySelector("#mag").value;
+
+    event.preventDefault();
+    let validDates = await checkDates();
+    if(validDates){
+        localStorage.setItem("startYear", startYear);
+        localStorage.setItem("startMonth", startMonth);
+        localStorage.setItem("startDay", startDay);
+
+        localStorage.setItem("endYear", endYear);
+        localStorage.setItem("endMonth", endMonth);
+        localStorage.setItem("endDay", endDay);
+
+        localStorage.setItem("magSign", magSign);
+        localStorage.setItem("magValue", magValue);
+
+        document.querySelector("#dateError").textContent ="";
+        document.querySelector("#searchResults").submit();
+    }else{
+        document.querySelector("#dateError").textContent = "Invalid Dates!!"
+    } 
+}
+async function checkDates(){
+    let startYear = document.querySelector("#startYear").value;
+    let startMonth = document.querySelector("#startMonth").value;
+    let startDay = document.querySelector('input[name="startDay"]:checked').value;
+
+    let endYear = document.querySelector("#endYear").value;
+    let endMonth = document.querySelector("#endMonth").value;
+    let endDay = document.querySelector('input[name="endDay"]:checked').value;
+
+    if(startYear < endYear || startMonth < endMonth){
+        return true;
+    }
+    else if(startYear == endYear && startMonth == endMonth && startDay < endDay){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 
 //change start month
 document.querySelector("#startMonth").addEventListener("change", () => editCalendar("start"));

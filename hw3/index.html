@@ -8,8 +8,11 @@
 
 </head>
 <body>
-    <h1> Earthquake Search</h1>
-<form id="searchResults" action="searchResult.html">
+   <div id="home_banner">
+      <img id="banner_img"  src="imgs/banner.jpeg" alt="home_banner">
+      <h1 id="es"> Earthquake Search</h1>
+   </div>
+<form id="searchResults" action="searchResults.html">
    <hr>
    <div id="calendars"> 
    <table id="startCalendar" data-str="start">
@@ -60,19 +63,20 @@
       </caption>
    </table>
    </div>
+   <span id="dateError" style="display: block; text-align: center; font-size: 30px; background-color: red; color: white;"></span>
 
    <hr>
 
    Magnitude:
-   <label><input type="radio" name="comparisonOp" value="lessThanOrEqualTo"> ≤ </label>
-   <label><input type="radio" name="comparisonOp" value="equalTo"> = </label>
-   <label><input type="radio" name="comparisonOp" value="greaterThanOrEqualTo"> ≥ </label>
-   <label><input type="range" id="mag" name="mag" min="1.0" max="9.9" step="0.1" value="1.0" oninput="magValue.value = this.value"></label>
-   <output id="magValue"></output>
+   <label><input type="radio" name="comparisonOp" value="maxmagnitude"> &lt </label>
+   <label><input type="radio" name="comparisonOp" value="minmagnitude" checked> &gt </label>
+   <label><input type="range" id="mag" name="mag" min="1.0" max="9.9" step="0.1" value="1" oninput="magValue.value = this.value"></label>
+   <output id="magValue">1</output>
 
 
    <hr>
    <button>Search!</button>
+
 </form>
 
     <script src="js/script.js"> </script>

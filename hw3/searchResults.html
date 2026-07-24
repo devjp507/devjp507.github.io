@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1 style="display: block; text-align: center;"> Search Results </h1>
+    <table id="resultsT">
+    <thead>
+    <tr>
+        <th>Magnitude</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Alert Level</th>
+    </tr>
+   </thead>
+  </table>
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const startYear = localStorage.getItem("startYear");
+        const startMonth = localStorage.getItem("startMonth");
+        const startDay = localStorage.getItem("startDay");
+
+        const endYear = localStorage.getItem("endYear");
+        const endMonth = localStorage.getItem("endMonth");
+        const endDay = localStorage.getItem("endDay");
+        const magSign = localStorage.getItem("magSign");
+        const magValue = localStorage.getItem("magValue");
+
+        const startDate = startYear + "-" + startMonth + "-" + startDay;
+        const endDate = endYear + "-" + endMonth + "-" + endDay;
+        const magPar = magSign + "=" + magValue;
+
+        loadResultsTable(startDate, endDate, magPar);
+    });
+    
+    async function loadResultsTable(startDate, endDate, magPar) {
+        
+        let resultsTable = document.querySelector("#resultsT");
+
+        try {
+            let url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${startDate}&endtime=${endDate}&${magPar}`;
+            let response = await fetch(url);
+            let data = await response.json();
+
+            for(let i = 0; i<data.features.length; i++){
+                let row = document.createElement("tr");
+
+                let td1 = document.createElement("td");
+                td1.textContent = data.features[i].properties.mag;
+                row.appendChild(td1);
+
+                let td2 = document.createElement("td");
+                let epochMs = data.features[i].properties.updated;
+                let date = new Date(epochMs);
+                td2.textContent = date.toISOString();
+                row.appendChild(td2);
+
+                let td3 = document.createElement("td");
+                td3.textContent = data.features[i].properties.place;
+                row.appendChild(td3);
+
+                let td4 = document.createElement("td");
+                td4.textContent = data.features[i].properties.alert;
+                let alert = data.features[i].properties.alert;
+                td4.style=`background-color: ${alert}`;
+
+
+                row.appendChild(td4);
+
+                resultsTable.appendChild(row);
+            }
+
+        } catch (error) {
+            console.log("ERROR");
+        }
+    }
+
+
+  </script>
+
+</body>
+</html>
